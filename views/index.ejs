@@ -79,9 +79,18 @@
       /* overflow: hidden; */
       overflow-x: scroll;
       border: none;
+      position: relative;
     }
     .center-artical-nav::-webkit-scrollbar {
        display: none;
+    }
+    .liner-gradint{
+      height: 100%;
+      width: 4%;
+      /* background: linear-gradient(to right,rgb(222,231,),rgb(238, 240, 238),rgb(247, 247, 247)); */
+      position: absolute;
+      left: 0;
+      top: 0;
     }
     .center-artical-nav ul{
       height: 100%;
@@ -141,6 +150,15 @@
     }
     .left-main-info-con h2{
       font-weight: 500;
+    }
+    .left-main-info-con p{
+      margin: auto;
+      font-weight: 400;
+      font-size: 15px;
+      margin-top: 15px;
+      line-height: 20px;
+      color: #434343;
+      width: 70%;
     }
     .right-info-con{
       height: 100%;
@@ -470,6 +488,7 @@
     </div>
     <div class="center-artical-nav">
       <ul>
+        <!-- <div class="liner-gradint"></div> -->
         <li><a href="/articles/Politics">Politics</a></li>
         <li><a href="/articles/Business">Business</a></li>
         <li><a href="/articles/Technology">Technology</a></li>
@@ -488,8 +507,9 @@
   <div class="main">
     <div class="main-info-Con">
       <div class="left-main-info-con">
-        <h1>News Hub</h1>
-        <h2>Where Knowledge Meets Discovery</h2>
+          <h1>News Hub</h1>
+          <h2>Where Knowledge Meets Discovery</h2>
+          <p>Welcome to News Hub Hero, your trusted destination for breaking news from around the globe. We are your front-row seat to the most compelling stories, providing you with up-to-the-minute updates on politics, business, technology, entertainment, and more.</p>
       </div>
       <div class="right-info-con">
         <img src="/images/[removal.ai]_tmp-6494d05c3ab39.png" alt="">
