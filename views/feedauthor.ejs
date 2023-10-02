@@ -135,6 +135,7 @@
         margin: 1.2%;
     }
     .card p{
+        color: #FFF;
         font-size: 1.2vh;
     }  
     .card button{
@@ -170,9 +171,9 @@
             <div class="card">
                 <img class="background-img mb-1" src="/images/profileimages/<%= user.avatar%>" alt="profile">
                 <h4><%= author.username%></h4>
-                <p>last Signin</p>
-                <p><%= author.lastSignin?.date%></p>
-                <button class="mt-4" onclick="redirectToTerminateAuthor('<%= author.id%>')">Terminate</button>
+                <p class=""><%= author.email %></p>
+                
+                <button class="mt-5" onclick="redirectToMakeAuthor('<%= author.id%>')">MaKe author</button>
             </div>
           <% }); %>
         <!-- <div class="article">
@@ -193,8 +194,8 @@
     </div>
     <script>
       
-      function redirectToTerminateAuthor(id) {
-        window.location.href = '/terminate-Author/'+ id ;
+      function redirectToMakeAuthor(id) {
+        window.location.href = '/make-author/'+ id ;
       }
       function redirectToProfile() {
         window.location.href = '/profile';

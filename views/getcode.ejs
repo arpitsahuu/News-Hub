@@ -60,34 +60,27 @@
             /* text-decoration: none; */
 
         }
+        .lab{
+            color: #d1d1d1;
+        }
     </style>
 </head>
 <body>
     <div class="main">
         <a class="home-btn" href="/">Home</a>
         <div class="sub-con">
-            <h3 class="fs-1">Sign In</h3>
-            <form class="form" action="/signin" method="post">
-                <input type="username" class="form-control mt-3 username" name="username" id="" placeholder="username" required>
-                <input type="password" class="form-control mt-3 mb-4 password" name="password" id="" placeholder="password" required>
-                <button class="btn btn-secondary">Signin</button>
+            <h3 class="fs-1">Code</h3>
+            <form class="form" action="/code/<%= id %>" method="post">
+                <label class="lab" for="code"> please enter the 4 digit code that send to <%= email %> 
+                <input type="text" class="form-control mt-3 mb-4 password" name="code" id="" placeholder="Code" required>
+            </label>
+                <button class="btn btn-secondary mt-4">Conform</button>
             </form>
-            <a href="/forgetpassword" class="mb-5 mt-3">Forgetpassword</a>
-            <p>Do not have a account <a href="/signup">Sign up</a></p>
+            <p class="mt-1">Do not have a account <a href="/signup">Sign up</a></p>
         </div>
     </div>
     <script>
-        document.querySelector('form').addEventListener('submit', function(event) {
-        const usernameInput = document.querySelector('.username');
-        const passwordInput = document.querySelector('.password');
-    
         
-        if (!usernameInput.value.trim()|| !passwordInput.value.trim() ) {
-          event.preventDefault();
-          
-          alert('Please fill all the details.');
-        }
-      });
     </script>
 </body>
 </html>

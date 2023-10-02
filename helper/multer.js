@@ -16,6 +16,7 @@ function fileFilter(req, file, cb) {
     let filetypes = /jpeg|jpg|png|gif|avif|svg|webp/;
     let mimetype = filetypes.test(file.mimetype);
     let extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+    
     if (mimetype && extname) {
         return cb(null, true);
     }

@@ -8,6 +8,7 @@ passport.use(new localStratagy(User.authenticate()));
 const imageupload = require("../helper/multer").single("image");
 const proimageupload = require("../helper/profileMulter").single("avatar");
 const fs = require("fs");
+const Nodemailer = require("nodemailer")
 
 const { 
   homepage,
@@ -21,7 +22,8 @@ const {
   articalget,
   updateuserepage,
   updatepost,
-  profileupload
+  profileupload,
+  savearticle
 } = require("../controllers/indexController");
 
 const { 
@@ -72,36 +74,78 @@ router.get("/forgetpassword", forgetpasswordget);
 /* POST forgetpassword Route. */
 router.post("/send-mail", async function (req, res, next) {
   const user = await User.findOne({ email: req.body.email });
-  if (!user) return res.send("user not found");
+  if (!user) return res.status(404).json({message:"user not found with this email addres"})
+
   var code = `${Math.floor(Math.random() * 9000 + 1000)}`;
 
   //------ NODEMAILER
+
+  const transport = Nodemailer.createTransport({
+    service: "gmail",
+    host: "smtp.gmail.com",
+    port: 587,
+    auth: {
+      user: process.env.MAIL_EMAIL_ADDRES,
+      pass: process.env.MAIL_PASSWORD
+    }
+  });
+  
+  
+  const mailOption = {
+  from: "News Hub Pvt. Ltd.<arpitsahu358@gmil.com>",
+  to: req.body.email,
+  subject: "password reset link",
+  text: "do not sherar this with anyone",
+  html: `<p>Do not share this Code to anyone.</p><h1>${code}</h1>`,
+  };
+
+  transport.sendMail(mailOption, async  (err, info) =>{
+    if (err) return res.send(err);
+
+
+    await User.findByIdAndUpdate(user._id, {code});
+  
+    res.redirect("/code/" + user._id);
+  })
 });
+
+
 
 /* GET CODE page. */
 router.get("/code/:id", async function (req, res, next) {
-  res.render("getcode", { title: "code", id: req.params.id });
+  const {email} = await User.findById(req.params.id);
+  res.render("getcode", { title: "code", id: req.params.id , email:email });
 });
+
 
 // POST CODE ROUTE.
 router.post("/code/:id", async function (req, res, next) {
   const user = await User.findById(req.params.id);
   if (user.code == req.body.code) {
-    await User.findByIdAndUpdate(user._id, { code: "" });
-    res.redirect("/forgetpassword/" + user._id);
+    user.code = "";
+    user.token = 1;
+    await user.save();
+    res.redirect("/changepassword/" + user._id);
   } else {
     res.send("invalit code");
   }
 });
 
-router.get("/forgetpassword/:id", async function (req, res, next) {
-  res.render("forgetpassword", { title: "Forgetpassword", id: req.params.id });
+router.get("/changepassword/:id", async function (req, res, next) {
+  const user = await User.findById(req.params.id)
+  if(user.token == 1){
+    res.render("changepassword", { title: "Forgetpassword", id:req.params.id });
+  } 
+  else{
+    res.json({message:"you are not Authenticated to access Change password page."})
+  }
 });
 
-router.post("/forgetpassword/:id", async function (req, res, next) {
-  var currentUser = await User.findOne({ _id: req.params.id });
+router.post("/changepassword/:id", async function (req, res, next) {
+  let currentUser = await User.findOne({ _id: req.params.id });
   currentUser.setPassword(req.body.password, async (err, info) => {
     if (err) res.send(err);
+    currentUser.token = 0;
     await currentUser.save();
     res.redirect("/signin");
   });
@@ -141,6 +185,10 @@ router.get("/updateuser", isLoggedIn,updateuserepage);
 
 // Route to handle updating user information
 router.post("/updateuser", isLoggedIn, updatepost );
+
+// Route to save the aritcle
+router.get("/save/:id", isLoggedIn, savearticle );
+
 
 // user logout
 router.get("/logout", isLoggedIn, function (req, res, next) {

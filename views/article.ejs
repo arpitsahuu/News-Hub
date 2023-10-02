@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title%></title>
+    
     <style>
         *{
       margin: 0;
@@ -39,10 +40,11 @@
       margin: 0 8%;
       cursor: pointer;
     }
-    .nav1 ul li a{
-      font-size: 2.5vh;
-      color: #000;
-      text-decoration: none;
+    .nav1 ul li a {
+        font-size: 2.5vh;
+        color: #000;
+        text-decoration: none;
+        text-wrap: nowrap;
     }
 
     .nav2{
@@ -132,6 +134,14 @@
       padding: 3% 3%;
       line-height: 30px;
       word-spacing: 7px;
+    }
+    .savebtn {
+      padding: 10px 18px ;
+      background-color: rgb(77, 181, 242);
+      color:#fff;
+      margin-top: 20px;
+      border: none;
+      border-radius: 20px;
     }
     /* 
   ##Device = Desktops
@@ -257,7 +267,7 @@
 <body>
     <nav class="nav1 ">
       <ul class="d-flex ">
-        <li>logo</li>
+        <li class="logo"><a href="">News Hub</a></li>
         <li ><a href="/">Home</a></li>
         <li ><a href="/About">About</a></li>
         <li ><a href="/Contacts">Contacts</a></li>
@@ -290,10 +300,14 @@
       <img src="/images/articleimages/<%= article.Image %>" alt="">
       <h1><%= article.Title %></h1>
       <p class="contant"><%= article.Content %></p>
+      <button class="savebtn" onclick="redirectTosave('<%= article._id %>')">save</button>
     </div>
 <script>
   function redirectToProfile() {
     window.location.href = '/profile';
+  }
+  function redirectTosave(id) {
+    window.location.href = '/save/' + id;
   }
 </script>
 </body>

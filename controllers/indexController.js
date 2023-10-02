@@ -191,8 +191,7 @@ exports.profileupload = async function (req, res, next) {
 
 exports.likeartical = async function (req, res, next) {
   try {
-    const userId = req.user.id; // Assuming you have implemented user authentication
-
+    const userId = req.user.id; 
     // Check if the user and article exist
     const user = await User.findById(userId);
     const article = await Article.findById(req.params.id);
@@ -211,38 +210,46 @@ exports.likeartical = async function (req, res, next) {
   }
 };
 
+// exports.savearticle = async function (req, res, next) {
+//   try {
+//     const userId = req.user.id;
+
+//     // Check if the user and article exist
+//     // const user = await User.findById(userId);
+//     const article = await Article.findById(req.params.id);
+
+//     if (!user || !article) {
+//       return res.status(404).json({ error: "User or article not found" });
+//     }
+
+//     // Add the article's ID to the user's liked articles array
+//     user.SaveArticals.push(article._id);
+//     await user.save();
+
+//     res.redirect(`/articles/${article._id}`);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
 exports.savearticle = async function (req, res, next) {
   try {
-    const userId = req.user.id; // Assuming you have implemented user authentication
-
-    // Check if the user and article exist
-    // const user = await User.findById(userId);
-    const article = await Article.findById(req.params.id);
-
-    if (!user || !article) {
-      return res.status(404).json({ error: "User or article not found" });
+    const user = req.user;
+    const issave = user.SaveArticals.filter((e) => (e == req.params.id))
+    console.log(issave)
+    if(issave.length != 0){
+      return res.json({massage:"already save that article"})
     }
-
-    // Add the article's ID to the user's liked articles array
-    user.SaveArticals.push(article._id);
-    await user.save();
-
-    res.redirect(`/articles/${article._id}`);
+    user.SaveArticals.push(req.params.id)
+    res.redirect("back");
   } catch (error) {
     console.log(error);
   }
 };
 
-exports.profilepage = async function (req, res, next) {
-  try {
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-exports.profilepage = async function (req, res, next) {
-  try {
-  } catch (error) {
-    console.log(error);
-  }
-};
+// exports.profilepage = async function (req, res, next) {
+//   try {
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };

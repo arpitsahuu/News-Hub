@@ -55,7 +55,11 @@ const userSchema = new mongoose.Schema({
     },
     status:{
         type:String
-    }
+    }, 
+    code:{
+        type:Number
+    },
+    token:Number,
 },
 { timestamps: true }
 );
