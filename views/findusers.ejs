@@ -171,12 +171,12 @@
     </nav>
     <div class="main">
 
-        <% users.forEach(function(user,index) { %>
+        <% users.forEach(function(newuser,index) { %>
             <div class="card">
-                <img class="background-img mb-1" src="/images/profileimages/<%= user.avatar%>" alt="profile">
-                <h4><%= user.username%></h4>
-                <p><%= user.email%></p>
-                <button class="mt-5" onclick="redirectToDeleteUser('<%= user.id%>')">Delete</button>
+                <img class="background-img mb-1" src="/images/profileimages/<%= newuser.avatar%>" alt="profile">
+                <h4><%= newuser.username%></h4>
+                <p><%= newuser.email%></p>
+                <button class="mt-5" onclick="redirectToDeleteUser('<%= newuser.id%>')">Delete</button>
             </div>
           <% }); %>
         

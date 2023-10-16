@@ -125,13 +125,23 @@
         border-radius: 10px;
         margin-left: 20px;
     }
+    .btns{ 
+        display: flex;
+    }
+    .btns p{
+        margin: 0 10px;
+        font-size: 15px;
+    }
+    .logo{
+        text-wrap: nowrap;
+    }
   
     </style>
 </head>
 <body>
     <nav class="nav1 ">
         <ul class="d-flex ">
-          <li>logo</li>
+          <li class="logo">News hub</li>
           <li>Home</li>
           <li>About</li>
           <li>Contacts</li>
@@ -143,21 +153,26 @@
     <div class="main">
 
         <% articles.forEach(function(article,index) { %>
+            <!-- <h2>hello</h2> -->
             <div class="article">
                 <div class="img-con">
                     <img src="/images/articleimages/<%= article.Image %>" alt="">
                 </div>
                 <div class="info">
-                    <p><%= article.createdAt%></p>
+                    <p><%= article.createdAt.toLocaleDateString('en-IN', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric',
+                      })%></p>
                     <div class="title-con">
                         <h2><%= article.Title %></h2>
                     </div>
                     <div class="action-btns">
                         <p><%= article.Category%></p>
-                        <!-- <div class="btns">
+                        <div class="btns">
                             <p><i class="ri-team-line"></i> <%= article.Views%></p>
-                            <p><i class="ri-heart-line"></i> <%= article.Likes%></p> -->
-                            <h2><%= article.Views %></h2>
+                            <p><i class="ri-heart-line"></i> <%= article.Likes%></p>
+                            <!-- <h2><%= article.Views %></h2> -->
                         </div>
                     </div>
                 </div>

@@ -125,13 +125,16 @@
         border-radius: 10px;
         margin-left: 20px;
     }
+    .logo{
+        text-wrap: nowrap;
+    }
   
     </style>
 </head>
 <body>
     <nav class="nav1 ">
         <ul class="d-flex ">
-          <li>logo</li>
+          <li class="logo">News hub</li>
           <li>Home</li>
           <li>About</li>
           <li>Contacts</li>
@@ -147,7 +150,11 @@
                     <img src="/images/articleimages/<%= article.Image %>" alt="">
                 </div>
                 <div class="info">
-                    <p><%= article.createdAt%></p>
+                    <p><%= article.createdAt.toLocaleDateString('en-IN', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric',
+                      })%></p>
                     <div class="title-con">
                         <h2><%= article.Title %></h2>
                     </div>

@@ -119,8 +119,8 @@ exports.authordeletarticle = async function (req, res, next) {
   try {
     console.log(req.params.id);
     const articleid = req.params.id;
-    const article = await Article.findOneAndDelete({ id: articleid });
-    res.redirect("back");
+    const article = await Article.findOneAndDelete({_id:req.params.id});
+    res.status(200).redirect("back");
   } catch (error) {
     res.status(500).json({ error: "An error occurred while deleting the article" });
   }

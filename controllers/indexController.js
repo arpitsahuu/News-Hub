@@ -51,6 +51,9 @@ exports.contactpage = async function (req, res, next) {
 
 exports.siginiget = async function (req, res, next) {
   try {
+    if(req.user) {
+      return res.redirect("/profile")
+    }
     res.render("signin", { title: "Signin" });
   } catch (error) {
     console.log(error);
@@ -75,6 +78,16 @@ exports.signuppost = async function (req, res, next) {
       .catch((err) => res.send(err));
   } catch (error) {
     console.log(error);
+  }
+};
+
+exports.usersignout = async function (req, res, next) {
+  try {
+    req.logout(() => {
+      res.redirect("/signin");
+    });
+  } catch (error) {
+    res.status(500).json({ error: "An error occurred while Signout" });
   }
 };
 
@@ -235,13 +248,27 @@ exports.likeartical = async function (req, res, next) {
 exports.savearticle = async function (req, res, next) {
   try {
     const user = req.user;
-    const issave = user.SaveArticals.filter((e) => (e == req.params.id))
+    const issave = user.SaveArticals.find((e) => (e == req.params.id))
     console.log(issave)
-    if(issave.length != 0){
+    if(issave){
       return res.json({massage:"already save that article"})
     }
     user.SaveArticals.push(req.params.id)
+    await user.save();
     res.redirect("back");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+exports.showsavedarticle = async function (req, res, next) {
+  try {
+   const article = await User.findById(req.user._id).populate("SaveArticals");
+   await 
+    res.render("savedaritcle",{
+      title:"Saved Articles",
+      article
+    });
   } catch (error) {
     console.log(error);
   }

@@ -293,7 +293,7 @@
                 <h2 class="mt-4 fw-bold"><%= user.username %></h2>
                 <h4 class="fs-4 fw-medium mt-2"><%=user.email %></h4>
                 <button onclick="redirectToUpdateuser()" class="btn btn-dark mt-2">edit profile</button>
-                <button class="btn btn-dark mt-3 ms-3 mb-3">log out</button>
+                <button class="btn btn-dark mt-3 ms-3 mb-3" onclick="redirectToLogout()">log out</button>
             </div>
             <div class="features-con">
                 <div class="like features">
@@ -317,6 +317,9 @@
         function redirectToUpdateuser() {
         window.location.href = '/updateuser';
       }
+      function redirectToLogout() {
+            window.location.href = '/logout';
+        }
     </script>
 </body>
 </html>

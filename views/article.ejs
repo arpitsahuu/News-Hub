@@ -296,7 +296,11 @@
         <div class="right-border"></div>
     </nav>
     <div class="main">
-      <p class="Date"><%= article.createdAt%></p>
+      <p class="Date"><%= article.createdAt.toLocaleDateString('en-IN', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+      })%></p>
       <img src="/images/articleimages/<%= article.Image %>" alt="">
       <h1><%= article.Title %></h1>
       <p class="contant"><%= article.Content %></p>

@@ -81,6 +81,7 @@
       overflow-x: scroll;
       border: none;
       position: relative;
+      border-radius: 20px;
     }
     .center-artical-nav::-webkit-scrollbar {
        display: none;
@@ -521,7 +522,11 @@
         <h4>Top</h4>
         <% toparticles.forEach(function(article,index) { %>
           <div class="toparticle">
-            <p><%= article.createdAt%></p>
+            <p><%= article.createdAt.toLocaleDateString('en-IN', {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric',
+            })%></p>
             <div class="top-title">
 
               <h2><%= article.Title %></h2>
@@ -538,7 +543,11 @@
                   <img src="/images/articleimages/<%= article.Image %>" alt="">
               </div>
               <div class="info">
-                  <p><%= article.createdAt%></p>
+                  <p><%= article.createdAt.toLocaleDateString('en-IN', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                  })%></p>
                   <div class="title-con">
                       <h2><%= article.Title %></h2>
                   </div>

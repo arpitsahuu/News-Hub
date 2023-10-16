@@ -67,7 +67,7 @@ exports.adminterminateauthor = async function (req, res, next) {
 exports.adminfeedauthor = async function (req, res, next) {
   try {
     const authors = await User.find({ isAuthor: "false" });
-    res.render("feedauthor", {
+    res.render("makeauthor", {
       title: "find-Article",
       isLoggedIn: req.user ? true : false,
       user: req.user,
@@ -107,12 +107,12 @@ exports.admindeleauthor = async function (req, res, next) {
 
 exports.adminarticlereach = async function (req, res, next) {
   try {
-    const articles = await Article.find();
+    const articles = await Article.find().sort({ Views: -1 });
     res.render("articlereach", {
       title: "find-Article",
       isLoggedIn: req.user ? true : false,
       user: req.user,
-      articles:articles,
+      articles,
     });
   } catch (error) {
     console.log(error);

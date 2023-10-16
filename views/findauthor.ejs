@@ -168,7 +168,7 @@
 
         <% authors.forEach(function(author,index) { %>
             <div class="card">
-                <img class="background-img mb-1" src="/images/profileimages/<%= user.avatar%>" alt="profile">
+                <img class="background-img mb-1" src="/images/profileimages/<%= author.avatar%>" alt="profile">
                 <h4><%= author.username%></h4>
                 <p>last Signin</p>
                 <p><%= author.lastSignin?.date%></p>

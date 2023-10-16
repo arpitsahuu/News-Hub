@@ -23,7 +23,8 @@ const {
   updateuserepage,
   updatepost,
   profileupload,
-  savearticle
+  savearticle,
+  usersignout
 } = require("../controllers/indexController");
 
 const { 
@@ -67,6 +68,10 @@ router.get("/signup", signupget);
 
 // POST Sighup route.
 router.post("/signup", signuppost);
+
+//GET Logout
+router.get("/logout", isLoggedIn, usersignout);
+
 
 /* GET forgetpassword page. */
 router.get("/forgetpassword", forgetpasswordget);
@@ -268,7 +273,7 @@ router.get("/edit-article/:id",isLoggedIn,isAuthor,authoreditarticle);
 router.post("/edit-article/:id",isLoggedIn,isAuthor, authoreditarticlepost);
 
 /*  delete Artical page for Author. */
-router.get("/delete-article/:id",isLoggedIn,isAdmin, authordeletarticle);
+router.get("/delete-article/:id",isLoggedIn,isAuthor, authordeletarticle);
 
 // -----------------Admin--------------------
 

@@ -19,6 +19,9 @@
       background-color: #000;
       font-family:"Montserrat" ;
       /* padding: 16px 14px 0 14px; */
+      padding-top: 5px;
+      padding-left: 10px;
+      padding-right: 10px;
 
     }
     .nav1{
@@ -31,11 +34,13 @@
       justify-content: space-between;
       padding: 0 2%;
       /* margin-top: 15px; */
-      /* margin: 2%; */
+      /* margin: 0 2%; */
     }
     nav ul{
       display: flex;
+      align-items: center;
       list-style: none;
+      padding-top: 10px;
     }
     .nav1 ul li{
       margin: 0 8%;
@@ -282,7 +287,7 @@
                 <h2 class="mt-4 fw-bold"><%= user.username %></h2>
                 <h4 class=" fw-medium mt-2"><%=user.email %></h4>
                 <button onclick="redirectToUpdateuser()" class="btn btn-dark mt-3">edit profile</button>
-                <button class="btn btn-dark mt-3 ms-3">log out</button>
+                <button class="btn btn-dark mt-3 ms-3" onclick="redirectToLogout()">log out</button>
             </div>
             <div class="features-con">
                 <div onclick="redirectToFindUsers()" class="users featurs">
@@ -310,7 +315,6 @@
         const profilePic = document.querySelector(".profile-img");
         const uploadImg = document.querySelector(".upload-Img");
         profilePic.addEventListener("click", () => {
-            console.log("hello");
             uploadImg.click();
         }); 
         function redirectToFindUsers() {
@@ -327,6 +331,9 @@
         }
         function redirectToArticleReach() {
             window.location.href = '/Article-reach';
+        }
+        function redirectToLogout() {
+            window.location.href = '/logout';
         }
     </script>
 </body>
